@@ -19,30 +19,30 @@ n_classes=1
 model = Sequential()
 # add the convolutional layer
 # filters, size of filters,padding,activation_function,input_shape
-model.add(Input(shape=(img_width,img_height,3)))
-model.add(Conv2D(64, (3,3), padding='SAME', activation='relu', name="layer1"))
+model.add(Input(shape=(img_width,img_height,3), name="layer1"))
+model.add(Conv2D(64, (3,3), padding='SAME', activation='relu', name="layer2"))
 # pooling layer
-model.add(MaxPooling2D(pool_size=(2,2)), name="layer2")
+model.add(MaxPooling2D(pool_size=(2,2), name="max_pool_layer1"))
 # place a dropout layer
 #model.add(Dropout(0.2))
 # add another convolutional layer
 model.add(Conv2D(64, (3,3), padding='SAME', activation='relu', name="layer3"))
 # pooling layer
-model.add(MaxPooling2D(pool_size=(2,2)), name="layer4")
+model.add(MaxPooling2D(pool_size=(2,2), name="max_pool_layer1"))
 # place a dropout layer
 #model.add(Dropout(0.5))
 # add another convolutional layer
-model.add(Conv2D(64, (3,3), padding='SAME', activation='relu'), name="layer5")
+model.add(Conv2D(64, (3,3), padding='SAME', activation='relu', name="layer4"))
 # pooling layer
-model.add(MaxPooling2D(pool_size=(2,2)), name="layer6")
+model.add(MaxPooling2D(pool_size=(2,2), name="max_pool_layer1"))
 # Flatten layer
-model.add(Flatten())
+model.add(Flatten(), name="flatten_layer")
 # add a dense layer : amount of nodes, activation
-model.add(Dense(512, activation='relu'), name="layer7")
-model.add(Dense(256,activation='relu'), name="layer8")
-model.add(Dense(128,activation='relu'), name="layer9")
+model.add(Dense(512, activation='relu', name="layer6"))
+model.add(Dense(256,activation='relu', name="layer7"))
+model.add(Dense(128,activation='relu', name="layer8"))
 model.add(Dropout(0.5))
-model.add(Dense(n_classes,activation='sigmoid'), name="output_layer")
+model.add(Dense(n_classes,activation='sigmoid', name="output_layer"))
 model.compile(Adam(learning_rate=0.001), loss='categorical_crossentropy', metrics=['accuracy'])
 
 # Load the model weights
