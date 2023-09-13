@@ -1,6 +1,7 @@
 import streamlit as st
 import numpy as np
-import io
+import cv2
+from skimage import io
 from keras.models import Sequential
 import tensorflow as tf
 from tensorflow.keras.layers import Input, Conv2D, MaxPooling2D, Dropout, Flatten, Dense
@@ -47,14 +48,20 @@ model.compile(Adam(learning_rate=0.001), loss='categorical_crossentropy', metric
 # Load the model weights
 model.load_weights('covid_classification_new_model_weights_omdena_custom_clahe.hdf5')
 
-upload= st.file_uploader('Insert X-ray image of a patient for classification', type=['png','jpg'])
+upload= st.file_uploader('Insert X-ray image of a patient for classification', type=["png", "jpg", "jpeg"])
 c1, c2= st.columns(2)
 c1.header('Input Image')
 c2.header('Output')
-byteImgIO = io.BytesIO()
 if upload is not None:
-  img = load_img(upload, target_size=(img_width,img_height))
-  image = img_to_array(img)
+  img = io.imread(upload)
+  img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+  img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+  clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
+  cl = clahe.apply(img)
+  image = cv2.cvtColor(img, cv2.COLOR_GRAY2RGB)
+  image = cv2.resize(image, (img_width,img_height))
+  # img = load_img(image, target_size=(img_width,img_height))
+  image = img_to_array(image)
   image = np.expand_dims(image, axis=0)
   c1.image(img)
   prediction = model.predict(image)
@@ -62,7 +69,3 @@ if upload is not None:
     c2.write('COVID Not Detected')
   else:
     c2.write('COVID Detected')
-
-
-
-# c2.write(classes[vgg_pred_classes[0]] )
