@@ -20,29 +20,29 @@ model = Sequential()
 # add the convolutional layer
 # filters, size of filters,padding,activation_function,input_shape
 model.add(Input(shape=(img_width,img_height,3)))
-model.add(Conv2D(64, (3,3), padding='SAME', activation='relu'))
+model.add(Conv2D(64, (3,3), padding='SAME', activation='relu', name="layer1"))
 # pooling layer
-model.add(MaxPooling2D(pool_size=(2,2)))
+model.add(MaxPooling2D(pool_size=(2,2)), name="layer2")
 # place a dropout layer
 #model.add(Dropout(0.2))
 # add another convolutional layer
-model.add(Conv2D(64, (3,3), padding='SAME', activation='relu'))
+model.add(Conv2D(64, (3,3), padding='SAME', activation='relu', name="layer3"))
 # pooling layer
-model.add(MaxPooling2D(pool_size=(2,2)))
+model.add(MaxPooling2D(pool_size=(2,2)), name="layer3")
 # place a dropout layer
 #model.add(Dropout(0.5))
 # add another convolutional layer
-model.add(Conv2D(64, (3,3), padding='SAME', activation='relu'))
+model.add(Conv2D(64, (3,3), padding='SAME', activation='relu'), name="layer4")
 # pooling layer
-model.add(MaxPooling2D(pool_size=(2,2)))
+model.add(MaxPooling2D(pool_size=(2,2)), name="layer5")
 # Flatten layer
 model.add(Flatten())
 # add a dense layer : amount of nodes, activation
-model.add(Dense(512, activation='relu'))
-model.add(Dense(256,activation='relu'))
-model.add(Dense(128,activation='relu'))
+model.add(Dense(512, activation='relu'), name="layer6")
+model.add(Dense(256,activation='relu'), name="layer7")
+model.add(Dense(128,activation='relu'), name="layer8")
 model.add(Dropout(0.5))
-model.add(Dense(n_classes,activation='sigmoid'))
+model.add(Dense(n_classes,activation='sigmoid'), name="output_layer")
 model.compile(Adam(learning_rate=0.001), loss='categorical_crossentropy', metrics=['accuracy'])
 
 # Load the model weights
