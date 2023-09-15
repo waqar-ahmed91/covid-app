@@ -1,6 +1,5 @@
 import streamlit as st
 import numpy as np
-from skimage import io
 from tensorflow.keras.utils import load_img, img_to_array
 from tensorflow.keras.models import load_model
 
