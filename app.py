@@ -24,8 +24,8 @@ if upload is not None:
   image = np.expand_dims(image, axis=0)
   c1.image(img)
   prediction = model.predict(image)
-  print(prediction)
-  if prediction == 0:
+  # print(prediction)
+  if prediction < 0.5:
     c2.write('COVID Not Detected')
   else:
     c2.write('COVID Detected')
