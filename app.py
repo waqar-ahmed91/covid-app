@@ -25,7 +25,7 @@ if upload is not None:
   c1.image(img)
   prediction = model.predict(image)
   prediction = (prediction > 0.5).astype(int)
-  # print(prediction)
+  print(prediction)
   if prediction == 0:
     c2.write('COVID Not Detected')
   else:
