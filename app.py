@@ -12,7 +12,7 @@ img_width = 224
 
 
 # Load the model
-model = load_model('xception.h5', compile=False)
+model = load_model('2023-09-07_xception.h5', compile=False)
 
 upload= st.file_uploader('Upload X-ray image of a patient for classification', type=["png", "jpg", "jpeg"])
 c1, c2= st.columns(2)
