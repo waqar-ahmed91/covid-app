@@ -5,6 +5,8 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.inception_v3 import preprocess_input
 from PIL import Image
+
+st.image('omdena-logo.png',use_column_width=True)
 st.markdown('<h1 style="color:black;">COVID X-Ray Classification Model</h1>', unsafe_allow_html=True)
 st.markdown('<h2 style="color:gray;">This classification model classifies image into following categories:</h2>', unsafe_allow_html=True)
 st.markdown('<h3 style="color:gray;"> COVID and Non-COVID</h3>', unsafe_allow_html=True)
